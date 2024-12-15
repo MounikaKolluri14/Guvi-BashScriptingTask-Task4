@@ -1,0 +1,42 @@
+Task1
+------------------------
+task1.sh:
+============
+#!/bin/bash
+
+# URL from which you want http error code
+URL="https://guvi.in"
+
+#To get the HTTP status code using curl
+status_code=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
+
+if [ "$status_code" -eq 200 ]; then
+    echo "Success: HTTP status code is $status_code"
+else
+    echo "Failure: HTTP status code is $status_code"
+
+
+Task2
+---------------------------------
+task2.sh:
+========
+#!/bin/bash
+
+#take file name from user input
+read -p " Please enter the file name: " file
+
+# To check file existence
+if [ ! -f "$file" ]; then
+    echo "Error: File '$file' not found."
+        exit 1
+        fi
+
+        # using awk to check file from the 5th line onwards
+        awk 'NR >= 5 {
+            if ($0 ~ /welcome/) {
+                    gsub(/give/, "learning");
+                        }
+                        }1' "$file" > temp_file && mv temp_file "$file"
+
+                        echo "Word 'give' replaced with 'learning' from the 5th line in which line it contain welcome."
+
